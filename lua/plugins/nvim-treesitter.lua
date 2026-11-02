@@ -6,7 +6,10 @@ return {
     require('nvim-treesitter').install({ 'typescript', 'tsx', 'javascript', 'lua' })
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'lua' },
-      callback = function() vim.treesitter.start() end,
+      callback = function()
+        vim.treesitter.start()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
     })
   end,
 }
